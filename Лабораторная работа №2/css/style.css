@@ -1,0 +1,100 @@
+body {
+  box-sizing: border-box;
+  font-family: Arial;
+}
+
+a {
+  cursor: pointer;
+  text-decoration: none;
+}
+
+a, input {
+  outline: 0;
+}
+
+img {
+  max-width: 100%;
+}
+
+.header {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 100px;
+  background-color: #2946a0;
+  margin-bottom: 100px;
+}
+.nav-link {
+  color: #fff;
+}
+
+.tours {
+  border-radius: 16px;
+  background-color: #2946a0;
+  padding: 20px 0 50px 0;
+  color: #fff;
+}
+.tours-title {
+  display: block;
+  text-align: center;
+}
+.tours-main {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 0 auto;
+  width: 50%;
+}
+.tours-main__img {
+  display: block;
+  border-radius: 16px;
+}
+.find {
+  background-color: #2946a0;
+  text-align: center;
+  color: #fff;
+  border-radius: 16px;
+  height: 780px;
+}
+.find-wrap {
+  display: flex;
+  justify-content: center;
+  margin: 0 auto;
+  width: 20%;
+  background-color: #f4f9fc;
+  padding: 10px;
+  margin-bottom: 50px;
+}
+.find-input {
+  border: 0.5px solid #2946a0;
+  width: 70%;
+  height: 40px;
+}
+.find-button {
+  border: 0.5px solid #2946a0;
+  background-color: #2946a0;
+  color: #fff;
+  height: 44px;
+  width: 70px;
+}
+.find-container {
+display:none;
+}
+.clone-button {
+  display: block;
+  border: 0.5px solid #f4f9fc;
+  background-color: #2946a0;
+  color: #fff;
+  margin: 0 auto;
+  height: 44px;
+  width: 70px;
+}
+button:disabled {
+  opacity: 0.5;
+}

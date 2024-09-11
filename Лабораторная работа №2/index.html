@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="header">
+    <img src="img/logo.png" alt="Логотип" class="header-logo">
+  </header>
+  <nav class="nav">
+    <a href="#tours" class="nav-link">Экскурсия</a>
+    <a href="#find-title" class="nav-link">Поиск аудитории</a>
+  </nav>
+  <section class="tours">
+    <h2 class="tours-title">Виртуальные туры</h2>
+    <div class="tours-main">
+      <img src="img/tour2.jpg" alt="Панорама" class="tours-main__img">
+      <h3 class="tours-main__title">Приемная комиссия</h3>
+      <div class="tours-main__subtitle">РУТ (МИИТ)</div>
+    </div>
+  </section>
+  <section class="find">
+	<form action="/office" method="POST">
+    <h2 class="find-title">Поиск аудитории</h2>
+    <div class="find-wrap">
+      <input placeholder="Введите номер аудитории" type="text" id="office_id" class="find-input" name="office_id">
+      <label for="office_id">Office ID:</label>
+      <button class="find-button">Найти</button>
+    </div>
+    <div class="find-container">
+    </div>
+  </section>
+
+  <button id="clone-button" class="clone-button">Клон</button>
+  <div id="cloned-content"></div>
+
+<script src="js/src.js"></script>
+</body>
+</html>
