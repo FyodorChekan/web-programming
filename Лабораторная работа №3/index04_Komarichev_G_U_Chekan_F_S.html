@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Vue.js Table Navigation</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <style>
+        table {
+            width: 100%;
+            height: 300px;
+            table-layout: fixed;
+        }
+        td {
+            border: 1px solid black;
+            text-align: center;
+            vertical-align: middle;
+        }
+        input {
+            display: block;
+            margin-top: 20px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+
+<div id="app">
+    <table>
+        <tr>
+            <td v-if="currentCell === 0" :style="cellStyle">{{ inputText }}</td>
+            <td v-else></td>
+            <td v-if="currentCell === 1" :style="cellStyle">{{ inputText }}</td>
+            <td v-else></td>
+            <td v-if="currentCell === 2" :style="cellStyle">{{ inputText }}</td>
+            <td v-else></td>
+        </tr>
+        <tr>
+            <td v-if="currentCell === 3" :style="cellStyle">{{ inputText }}</td>
+            <td v-else></td>
+            <td v-if="currentCell === 4" :style="cellStyle">{{ inputText }}</td>
+            <td v-else></td>
+            <td v-if="currentCell === 5" :style="cellStyle">{{ inputText }}</td>
+            <td v-else></td>
+        </tr>
+    </table>
+
+    <input type="text" v-model="inputText" placeholder="Enter text" />
+</div>
+
+<script>
+new Vue({
+    el: '#app',
+    data: {
+        inputText: '', 
+        currentCell: 1,
+        hAlignIndex: 1,
+        hAlignments: ['left', 'center', 'right'], 
+        vAlign: 'middle' 
+    },
+    computed: {
+        cellStyle() {
+            return {
+                'text-align': this.hAlignments[this.hAlignIndex],
+                'vertical-align': this.vAlign
+            };
+        }
+    },
+    mounted() {
+        window.addEventListener('keydown', this.handleKeydown);
+    },
+    beforeDestroy() {
+        window.removeEventListener('keydown', this.handleKeydown);
+    },
+    methods: {
+        handleKeydown(event) {
+            switch(event.key) {
+                case 'ArrowLeft':
+                    this.moveLeft();
+                    break;
+                case 'ArrowRight':
+                    this.moveRight();
+                    break;
+                case 'ArrowUp':
+                    this.changeVerticalAlignment('up');
+                    break;
+                case 'ArrowDown':
+                    this.changeVerticalAlignment('down');
+                    break;
+            }
+        },
+        moveLeft() {
+            if (this.hAlignIndex > 0) {
+                this.hAlignIndex--;
+            } else if (this.currentCell === 0) {
+                this.currentCell = 5;
+                this.hAlignIndex = 2;
+            } else {
+                this.currentCell--;
+                this.hAlignIndex = 2; 
+            }
+        },
+        moveRight() {
+            if (this.hAlignIndex < 2) {
+                this.hAlignIndex++;
+            } else if (this.currentCell === 5) {
+                this.currentCell = 0;
+                this.hAlignIndex = 0; 
+            } else {
+                this.currentCell++;
+                this.hAlignIndex = 0;
+            }
+        },
+        changeVerticalAlignment(direction) {
+            if (direction === 'up') {
+                if (this.vAlign === 'bottom') {
+                    this.vAlign = 'middle';
+                } else if (this.vAlign === 'middle') {
+                    this.vAlign = 'top';
+                }
+            } else if (direction === 'down') {
+                if (this.vAlign === 'top') {
+                    this.vAlign = 'middle';
+                } else if (this.vAlign === 'middle') {
+                    this.vAlign = 'bottom';
+                }
+            }
+        }
+    }
+});
+</script>
+
+</body>
+</html>

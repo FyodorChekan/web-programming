@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Параметрическая связка </title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+    <style>
+        p {
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+
+        .sliders {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div id="app">
+        <div class="sliders">
+            <div>
+                <label for="red">Red: {{ red }}</label><br>
+                <input id="red" type="range" v-model="red" min="0" max="255" step="5">
+            </div>
+            <div>
+                <label for="green">Green: {{ green }}</label><br>
+                <input id="green" type="range" v-model="green" min="0" max="255" step="5">
+            </div>
+            <div>
+                <label for="blue">Blue: {{ blue }}</label><br>
+                <input id="blue" type="range" v-model="blue" min="0" max="255" step="5">
+            </div>
+        </div>
+        <p :style="{ color: rgbColor }">Привет!</p>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                red: 0,    
+                green: 0,  
+                blue: 0  
+            },
+            computed: {
+                rgbColor() {
+                    return `rgb(${this.red}, ${this.green}, ${this.blue})`;
+                }
+            },
+            methods: {
+                handleKeyDown(event) {
+                    let step = 5;
+                    if (event.ctrlKey) {
+                        step = -5;
+                        if (event.key === 'r') {
+                            event.preventDefault();
+                        } else if (event.key === 'g') {
+                            event.preventDefault();
+                        }
+                    }
+                    if (event.key === 'r') {
+                        this.red = this.changeValue(this.red, step);
+                    } else if (event.key === 'g') {
+                        this.green = this.changeValue(this.green, step);
+                    } else if (event.key === 'b') {
+                        this.blue = this.changeValue(this.blue, step);
+                    }
+                },
+                changeValue(colorValue, step) {
+                    const newValue = colorValue + step;
+                    if (newValue > 255) return 255;
+                    if (newValue < 0) return 0;
+                    return newValue;
+                }
+            },
+            mounted() {
+                window.addEventListener('keydown', this.handleKeyDown);
+            },
+            beforeDestroy() {
+                window.removeEventListener('keydown', this.handleKeyDown);
+            }
+        });
+    </script>
+</body>
+</html>
