@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Методы и события </title>
+    <script src="https://cdn.jsdelivr.net/npm/vue@2"></script>
+</head>
+<body>
+    <div id="app">
+        <input type="text"
+               placeholder="Введите текст здесь"
+               v-on:focus="isFocused = true"
+               v-on:blur="isFocused = false">
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                isFocused: false // Переменная для отслеживания фокуса
+            },
+            methods: {
+                handleKeyDown(event) {
+                    // Проверка нажатия комбинации клавиш Ctrl + S
+                    if (this.isFocused && event.ctrlKey && event.key === 's') {
+                        // Предотвращаем стандартное действие (открытие диалога сохранения)
+                        event.preventDefault();
+                        // Выводим диалоговое окно
+                        alert('Сохранение возможно по нажатию Ctrl + Click');
+                    }
+                }
+            },
+            mounted() {
+                // Прослушиваем глобальные события клавиатуры
+                window.addEventListener('keydown', this.handleKeyDown);
+            },
+            beforeDestroy() {
+                // Убираем слушатель событий при удалении компонента
+                window.removeEventListener('keydown', this.handleKeyDown);
+            }
+        });
+    </script>
+</body>
+</html>
